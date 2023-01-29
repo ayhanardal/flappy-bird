@@ -18,9 +18,10 @@ obstaclex = width + 50
 obstacley = 490
 gravity = 0
 start_time = 0
-patetes = 0
+sb_moves = 0
 animation_time = 0
 previous_position = 0
+numbers_int = [0,1,2,3,4,5,6,7,8,9]
 
 pygame.init()
 display = pygame.display.set_mode((width,height))
@@ -44,9 +45,6 @@ grd_rect_2 = grd_surface.get_rect(bottomleft = (width,height))
 
 title = pygame.image.load('ui/title.png').convert_alpha()
 title_rect = title.get_rect(centerx = w_2,centery = h_2 - 200)
-
-start_msg = pygame.image.load('ui/start-message.png').convert_alpha()
-start_msg_rect = start_msg.get_rect(centerx =w_2, centery= h_2 + 40)
 
 start_bird = pygame.image.load('ui/start-bird.png').convert_alpha()
 start_bird_rect = start_bird.get_rect(centerx = w_2, centery = h_2 - 60)
@@ -86,6 +84,8 @@ space2_icon_rect = space2_icon.get_rect(centerx =w_2, top=h_2 + 40)
 
 space_anim = [space_icon,space2_icon]
 
+# TO DO 
+
 _0 = pygame.image.load('number_symbols/0.png').convert_alpha()
 _1 = pygame.image.load('number_symbols/1.png').convert_alpha()
 _2 = pygame.image.load('number_symbols/2.png').convert_alpha()
@@ -97,109 +97,56 @@ _7 = pygame.image.load('number_symbols/7.png').convert_alpha()
 _8 = pygame.image.load('number_symbols/8.png').convert_alpha()
 _9 = pygame.image.load('number_symbols/9.png').convert_alpha()
 
-_0r = _0.get_rect(topleft=(blank_x_base,blank_y_base))
-_1r = _1.get_rect(topleft=(blank_x_base,blank_y_base))
-_2r = _2.get_rect(topleft=(blank_x_base,blank_y_base))
-_3r = _3.get_rect(topleft=(blank_x_base,blank_y_base))
-_4r = _4.get_rect(topleft=(blank_x_base,blank_y_base))
-_5r = _5.get_rect(topleft=(blank_x_base,blank_y_base))
-_6r = _6.get_rect(topleft=(blank_x_base,blank_y_base))
-_7r = _7.get_rect(topleft=(blank_x_base,blank_y_base))
-_8r = _8.get_rect(topleft=(blank_x_base,blank_y_base))
-_9r = _9.get_rect(topleft=(blank_x_base,blank_y_base))
-
-_0r1 = _0.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_1r1 = _1.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_2r1 = _2.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_3r1 = _3.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_4r1 = _4.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_5r1 = _5.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_6r1 = _6.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_7r1 = _7.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_8r1 = _8.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-_9r1 = _9.get_rect(topleft=(blank_x_base + number_blank,blank_y_base))
-
-_0r2 = _0.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_1r2 = _1.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_2r2 = _2.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_3r2 = _3.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_4r2 = _4.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_5r2 = _5.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_6r2 = _6.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_7r2 = _7.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_8r2 = _8.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-_9r2 = _9.get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base))
-
-_0r3 = _0.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_1r3 = _1.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_2r3 = _2.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_3r3 = _3.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_4r3 = _4.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_5r3 = _5.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_6r3 = _6.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_7r3 = _7.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_8r3 = _8.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-_9r3 = _9.get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base))
-
-_0rh = _0.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_1rh = _1.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_2rh = _2.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_3rh = _3.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_4rh = _4.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_5rh = _5.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_6rh = _6.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_7rh = _7.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_8rh = _8.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-_9rh = _9.get_rect(topleft=(blank_h_x_base,blank_h_y_base))
-
-_0r1h = _0.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_1r1h = _1.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_2r1h = _2.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_3r1h = _3.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_4r1h = _4.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_5r1h = _5.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_6r1h = _6.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_7r1h = _7.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_8r1h = _8.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-_9r1h = _9.get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base))
-
-_0r2h = _0.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_1r2h = _1.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_2r2h = _2.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_3r2h = _3.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_4r2h = _4.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_5r2h = _5.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_6r2h = _6.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_7r2h = _7.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_8r2h = _8.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-_9r2h = _9.get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base))
-
-_0r3h = _0.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_1r3h = _1.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_2r3h = _2.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_3r3h = _3.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_4r3h = _4.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_5r3h = _5.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_6r3h = _6.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_7r3h = _7.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_8r3h = _8.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-_9r3h = _9.get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base))
-
 numbers = [_0,_1,_2,_3,_4,_5,_6,_7,_8,_9]
 
-blank0 = [_0r,_1r,_2r,_3r,_4r,_5r,_6r,_7r,_8r,_9r]
-blank1 = [_0r1,_1r1,_2r1,_3r1,_4r1,_5r1,_6r1,_7r1,_8r1,_9r1]
-blank2 = [_0r2,_1r2,_2r2,_3r2,_4r2,_5r2,_6r2,_7r2,_8r2,_9r2]
-blank3 = [_0r3,_1r3,_2r3,_3r3,_4r3,_5r3,_6r3,_7r3,_8r3,_9r3]
+len_num = len(numbers)
 
-blank0_h = [_0rh,_1rh,_2rh,_3rh,_4rh,_5rh,_6rh,_7rh,_8rh,_9rh]
-blank1_h = [_0r1h,_1r1h,_2r1h,_3r1h,_4r1h,_5r1h,_6r1h,_7r1h,_8r1h,_9r1h]
-blank2_h = [_0r2h,_1r2h,_2r2h,_3r2h,_4r2h,_5r2h,_6r2h,_7r2h,_8r2h,_9r2h]
-blank3_h = [_0r3h,_1r3h,_2r3h,_3r3h,_4r3h,_5r3h,_6r3h,_7r3h,_8r3h,_9r3h]
+blank0 = []
+blank1 = []
+blank2 = []
+blank3 = []
+
+blank0_h = []
+blank1_h = []
+blank2_h = []
+blank3_h = []
+
+
+for i in range(len_num):
+    blank0.append(numbers[i].get_rect(topleft=(blank_x_base,blank_y_base)))
+
+
+for i in range(len_num):
+    blank1.append(numbers[i].get_rect(topleft=(blank_x_base + number_blank,blank_y_base)))
+
+
+for i in range(len_num):
+    blank2.append(numbers[i].get_rect(topleft=(blank_x_base + (number_blank * 2),blank_y_base)))
+
+
+for i in range(len_num):
+    blank3.append(numbers[i].get_rect(topleft=(blank_x_base + (number_blank * 3),blank_y_base)))
+
+
+for i in range(len_num):
+    blank0_h.append(numbers[i].get_rect(topleft=(blank_h_x_base,blank_h_y_base)))
+
+
+for i in range(len_num):
+    blank1_h.append(numbers[i].get_rect(topleft=(blank_h_x_base + number_blank,blank_h_y_base)))
+
+
+for i in range(len_num):
+    blank2_h.append(numbers[i].get_rect(topleft=(blank_h_x_base + (number_blank * 2),blank_h_y_base)))
+
+
+for i in range(len_num):
+    blank3_h.append(numbers[i].get_rect(topleft=(blank_h_x_base + (number_blank * 3),blank_h_y_base)))
+
 
 def display_score():
 
-    global numbers, blank0, blank1, blank2, blank3, start_time
+    global numbers, blank0, blank1, blank2, blank3, start_time, numbers_int, len_num
     
     current_time = int(pygame.time.get_ticks() / 1000) - start_time
 
@@ -211,92 +158,24 @@ def display_score():
         current_blank.append(number)
     
     if len(current_blank) >= 1:
-        if current_blank[0] == '0':
-            display.blit(numbers[0],blank0[0])
-        elif current_blank[0] == '1':
-            display.blit(numbers[1],blank0[1])
-        elif current_blank[0] == '2':
-            display.blit(numbers[2],blank0[2])
-        elif current_blank[0] == '3':
-            display.blit(numbers[3],blank0[3])
-        elif current_blank[0] == '4':
-            display.blit(numbers[4],blank0[4])
-        elif current_blank[0] == '5':
-            display.blit(numbers[5],blank0[5])
-        elif current_blank[0] == '6':
-            display.blit(numbers[6],blank0[6])
-        elif current_blank[0] == '7':
-            display.blit(numbers[7],blank0[7])
-        elif current_blank[0] == '8':
-            display.blit(numbers[8],blank0[8])
-        elif current_blank[0] == '9':
-            display.blit(numbers[9],blank0[9])
+            for i in numbers_int:
+                if current_blank[0] == str(i):
+                    display.blit(numbers[i],blank0[i])
         
     if len(current_blank) >= 2:
-        if current_blank[1] == '0':
-            display.blit(numbers[0],blank1[0])
-        elif current_blank[1] == '1':
-            display.blit(numbers[1],blank1[1])
-        elif current_blank[1] == '2':
-            display.blit(numbers[2],blank1[2])
-        elif current_blank[1] == '3':
-            display.blit(numbers[3],blank1[3])
-        elif current_blank[1] == '4':
-            display.blit(numbers[4],blank1[4])
-        elif current_blank[1] == '5':
-            display.blit(numbers[5],blank1[5])
-        elif current_blank[1] == '6':
-            display.blit(numbers[6],blank1[6])
-        elif current_blank[1] == '7':
-            display.blit(numbers[7],blank1[7])
-        elif current_blank[1] == '8':
-            display.blit(numbers[8],blank1[8])
-        elif current_blank[1] == '9':
-            display.blit(numbers[9],blank1[9])
+        for i in numbers_int:
+            if current_blank[1] == str(i):
+                display.blit(numbers[i],blank1[i])
 
     if len(current_blank) >= 3:
-        if current_blank[2] == '0':
-            display.blit(numbers[0],blank2[0])
-        elif current_blank[2] == '1':
-            display.blit(numbers[1],blank2[1])
-        elif current_blank[2] == '2':
-            display.blit(numbers[2],blank2[2])
-        elif current_blank[2] == '3':
-            display.blit(numbers[3],blank2[3])
-        elif current_blank[2] == '4':
-            display.blit(numbers[4],blank2[4])
-        elif current_blank[2] == '5':
-            display.blit(numbers[5],blank2[5])
-        elif current_blank[2] == '6':
-            display.blit(numbers[6],blank2[6])
-        elif current_blank[2] == '7':
-            display.blit(numbers[7],blank2[7])
-        elif current_blank[2] == '8':
-            display.blit(numbers[8],blank2[8])
-        elif current_blank[2] == '9':
-            display.blit(numbers[9],blank2[9])
+        for i in numbers_int:
+            if current_blank[2] == str(i):
+                display.blit(numbers[i],blank2[i])
 
     if len(current_blank) == 4:
-        if current_blank[3] == '0':
-            display.blit(numbers[0],blank3[0])
-        elif current_blank[3] == '1':
-            display.blit(numbers[1],blank3[1])
-        elif current_blank[3] == '2':
-            display.blit(numbers[2],blank3[2])
-        elif current_blank[3] == '3':
-            display.blit(numbers[3],blank3[3])
-        elif current_blank[3] == '4':
-            display.blit(numbers[4],blank3[4])
-        elif current_blank[3] == '5':
-            display.blit(numbers[5],blank3[5])
-        elif current_blank[3] == '6':
-            display.blit(numbers[6],blank3[6])
-        elif current_blank[3] == '7':
-            display.blit(numbers[7],blank3[7])
-        elif current_blank[3] == '8':
-            display.blit(numbers[8],blank3[8])
-        elif current_blank[3] == '9':
-            display.blit(numbers[9],blank3[9])
+        for i in numbers_int:
+            if current_blank[3] == str(i):
+                display.blit(numbers[i],blank3[i])
 
     current_blank = []
 
@@ -304,7 +183,7 @@ def display_score():
 
 def display_high_score():
 
-    global high_score, numbers, blank0_h, blank1_h, blank2_h, blank3_h
+    global high_score, numbers, blank0_h, blank1_h, blank2_h, blank3_h, numbers_int, len_num
 
     if display_score() > high_score:
         high_score = display_score()
@@ -317,92 +196,24 @@ def display_high_score():
         current_h_blank.append(number)
 
     if len(current_h_blank) >= 1:
-        if current_h_blank[0] == '0':
-            display.blit(numbers[0],blank0_h[0])
-        elif current_h_blank[0] == '1':
-            display.blit(numbers[1],blank0_h[1])
-        elif current_h_blank[0] == '2':
-            display.blit(numbers[2],blank0_h[2])
-        elif current_h_blank[0] == '3':
-            display.blit(numbers[3],blank0_h[3])
-        elif current_h_blank[0] == '4':
-            display.blit(numbers[4],blank0_h[4])
-        elif current_h_blank[0] == '5':
-            display.blit(numbers[5],blank0_h[5])
-        elif current_h_blank[0] == '6':
-            display.blit(numbers[6],blank0_h[6])
-        elif current_h_blank[0] == '7':
-            display.blit(numbers[7],blank0_h[7])
-        elif current_h_blank[0] == '8':
-            display.blit(numbers[8],blank0_h[8])
-        elif current_h_blank[0] == '9':
-            display.blit(numbers[9],blank0_h[9])
+        for i in numbers_int:
+            if current_h_blank[0] == str(i):
+                display.blit(numbers[i],blank0_h[i])
         
     if len(current_h_blank) >= 2:
-        if current_h_blank[1] == '0':
-            display.blit(numbers[0],blank1_h[0])
-        elif current_h_blank[1] == '1':
-            display.blit(numbers[1],blank1_h[1])
-        elif current_h_blank[1] == '2':
-            display.blit(numbers[2],blank1_h[2])
-        elif current_h_blank[1] == '3':
-            display.blit(numbers[3],blank1_h[3])
-        elif current_h_blank[1] == '4':
-            display.blit(numbers[4],blank1_h[4])
-        elif current_h_blank[1] == '5':
-            display.blit(numbers[5],blank1_h[5])
-        elif current_h_blank[1] == '6':
-            display.blit(numbers[6],blank1_h[6])
-        elif current_h_blank[1] == '7':
-            display.blit(numbers[7],blank1_h[7])
-        elif current_h_blank[1] == '8':
-            display.blit(numbers[8],blank1_h[8])
-        elif current_h_blank[1] == '9':
-            display.blit(numbers[9],blank1_h[9])
+        for i in numbers_int:
+            if current_h_blank[1] == str(i):
+                display.blit(numbers[i],blank1_h[i])
 
     if len(current_h_blank) >= 3:
-        if current_h_blank[2] == '0':
-            display.blit(numbers[0],blank2_h[0])
-        elif current_h_blank[2] == '1':
-            display.blit(numbers[1],blank2_h[1])
-        elif current_h_blank[2] == '2':
-            display.blit(numbers[2],blank2_h[2])
-        elif current_h_blank[2] == '3':
-            display.blit(numbers[3],blank2_h[3])
-        elif current_h_blank[2] == '4':
-            display.blit(numbers[4],blank2_h[4])
-        elif current_h_blank[2] == '5':
-            display.blit(numbers[5],blank2_h[5])
-        elif current_h_blank[2] == '6':
-            display.blit(numbers[6],blank2_h[6])
-        elif current_h_blank[2] == '7':
-            display.blit(numbers[7],blank2_h[7])
-        elif current_h_blank[2] == '8':
-            display.blit(numbers[8],blank2_h[8])
-        elif current_h_blank[2] == '9':
-            display.blit(numbers[9],blank2_h[9])
+        for i in numbers_int:
+            if current_h_blank[2] == str(i):
+                display.blit(numbers[i],blank2_h[i])
 
     if len(current_h_blank) == 4:
-        if current_h_blank[3] == '0':
-            display.blit(numbers[0],blank3_h[0])
-        elif current_h_blank[3] == '1':
-            display.blit(numbers[1],blank3_h[1])
-        elif current_h_blank[3] == '2':
-            display.blit(numbers[2],blank3_h[2])
-        elif current_h_blank[3] == '3':
-            display.blit(numbers[3],blank3_h[3])
-        elif current_h_blank[3] == '4':
-            display.blit(numbers[4],blank3_h[4])
-        elif current_h_blank[3] == '5':
-            display.blit(numbers[5],blank3_h[5])
-        elif current_h_blank[3] == '6':
-            display.blit(numbers[6],blank3_h[6])
-        elif current_h_blank[3] == '7':
-            display.blit(numbers[7],blank3_h[7])
-        elif current_h_blank[3] == '8':
-            display.blit(numbers[8],blank3_h[8])
-        elif current_h_blank[3] == '9':
-            display.blit(numbers[9],blank3_h[9])
+        for i in numbers_int:
+            if current_h_blank[3] == str(i):
+                display.blit(numbers[i],blank3_h[i])
 
     current_h_blank = []
 
@@ -420,10 +231,10 @@ def display_reset():
     grd_rect_2.x = width
     title_rect.centerx = w_2
     title_rect.centery = h_2 - 200
-
     player_rect.centerx = w_2
     player_rect.centery = h_2
-
+    scoreboard_rect.centery = height
+    start_button_rect.top = height + 100
     gravity = 0
 
 def display_scores():
@@ -475,8 +286,6 @@ def display_environment():
 
         if title_rect.centery > -100:
             display.blit(title,title_rect)
-        if start_msg_rect.centery < 700:    
-            display.blit(start_msg,start_msg_rect)
 
     elif game_mode == 2:
         display.blit(bg_surface,bg_rect)
@@ -588,9 +397,8 @@ while True:
 
         gravity += 1
         player_rect.y += gravity
-
+        sb_moves = 0
         title_rect.y -= 20
-        start_msg_rect.y += 20
 
         display_environment()
         display_scores()
@@ -601,13 +409,12 @@ while True:
         sb_h_score_rect = sb_h_score.get_rect(centerx=410,centery=650)
 
     elif game_mode == 2:
-        display_environment()
 
-        patetes += 3
-        scoreboard_rect.y -= patetes
-        sb_h_score_rect.y -= patetes
-        sb_score_rect.y -= patetes
-        start_button_rect.y -= patetes
+        sb_moves += 3
+        scoreboard_rect.y -= sb_moves
+        sb_h_score_rect.y -= sb_moves
+        sb_score_rect.y -= sb_moves
+        start_button_rect.y -= sb_moves
 
         if sb_score_rect.centery < 285:
             sb_score_rect.centery = 285
@@ -620,6 +427,7 @@ while True:
 
         if scoreboard_rect.centery < 300:
             scoreboard_rect.centery = 300    
+        display_environment()
   
     elif game_mode == 3:
 
